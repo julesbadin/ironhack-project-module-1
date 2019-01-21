@@ -4,7 +4,7 @@ var canvas = document.querySelector("#game-on");
 
 var ctx = canvas.getContext("2d");
 
-
+//=====================
 // Draw Player 
 
 var playerImg = new Image();
@@ -18,7 +18,7 @@ var player = {
   y: 250,
   width: 50,
   height: 50,
-  isCrashed: false
+  bounderies: false
 };
 
 function drawplayer() {
@@ -26,12 +26,10 @@ function drawplayer() {
 };
 
 
-// Items 
-
 // Player's moves
 
 document.onkeydown = function (event) {
-  if (player.isCrashed) {
+  if (player.bounderies) {
     return
   }
 
@@ -61,6 +59,45 @@ document.onkeydown = function (event) {
 
 
 //=====================
+// draw random Items 
+
+class Item {
+  constructor(itemX, itemY, itemWidth, itemHeight, itemType) {
+    this.x = itemX;
+    this.y = itemY;
+    this.width = itemWidth;
+    this.height = itemHeight;
+    this.type = itemType;
+    this.bounderies = true;
+  }
+
+  drawItem(oneItem) {
+
+    if (this.bounderies) {
+      this.x = player.x;
+      this.y = player.y;
+
+    } else {
+
+    }
+    ctx.fillStyle = 'white';
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+}
+
+var allItems = [
+  new Item(475, 325, 50, 25, "js"),
+  new Item(475, 325, 50, 25, "html"),
+  new Item(475, 325, 50, 25, "css"),
+  new Item(475, 325, 50, 25, "jquery"),
+
+
+];
+
+
+
+//=====================
 // Drawing loop
 drawingLoop();
 
@@ -70,7 +107,10 @@ function drawingLoop() {
 
   drawRoom();
   drawplayer();
-  drawItems();
+
+  allItems.forEach(function (oneItem) {
+    oneItem.drawItem();
+  });
 
 
   // ask the browser for a chance to re-draw the scene
@@ -79,16 +119,6 @@ function drawingLoop() {
     drawingLoop();
   });
 };
-
-
-//=====================
-// Draw Items : 
-
-function drawItems() {
-  ctx.fillStyle = "white";
-  ctx.fillRect(475, 325, 50, 25);
-  ctx.strokeRect(475, 325, 50, 25);
-}
 
 
 
@@ -114,9 +144,86 @@ function drawRoom() {
   ctx.fillRect(850, 250, 150, 100);
   ctx.fillRect(850, 450, 150, 100);
 
-  // - Draw the desk :
+  // --Draw the desk :
 
-  ctx.fillStyle = "grey";
-  ctx.fillRect(400, 300, 200, 75)
+  // ctx.fillStyle = "grey";
+  // ctx.fillRect(400, 300, 200, 75)
+
+
+  // --Draw walls :
+  ctx.fillStyle = "maroon";
+  ctx.strokeStyle = "brown";
+  ctx.lineWidth = 3;
+
+  // Upper walls
+  ctx.strokeRect(0, 0, 1000, 15);
+  ctx.fillRect(0, 0, 1000, 15);
+  ctx.strokeRect(0, 15, 1000, 15);
+  ctx.fillRect(0, 15, 1000, 15);
+  ctx.strokeRect(0, 30, 1000, 15);
+  ctx.fillRect(0, 30, 1000, 15);
+
+  //Downer walls
+  ctx.strokeRect(0, 585, 1000, 15);
+  ctx.fillRect(0, 585, 1000, 15);
+  ctx.strokeRect(0, 570, 1000, 15);
+  ctx.fillRect(0, 570, 1000, 15);
+  ctx.strokeRect(0, 555, 1000, 15);
+  ctx.fillRect(0, 555, 1000, 15);
+
+  // left walls
+  ctx.strokeRect(0, 0, 15, 600);
+  ctx.fillRect(0, 0, 15, 600);
+  ctx.strokeRect(15, 0, 15, 600);
+  ctx.fillRect(15, 0, 15, 600);
+  ctx.strokeRect(30, 0, 15, 600);
+  ctx.fillRect(30, 0, 15, 600);
+
+  // right walls
+  ctx.strokeRect(985, 0, 15, 600);
+  ctx.fillRect(985, 0, 15, 600);
+  ctx.strokeRect(970, 0, 15, 600);
+  ctx.fillRect(970, 0, 15, 600);
+  ctx.strokeRect(955, 0, 15, 600);
+  ctx.fillRect(955, 0, 15, 600);
+
+
+
+
+
+
+
+
+
+
+
 
 };
+
+//===================
+// carry item 
+
+function itemCollinsion(player, oneItem) {
+
+  if (player.y === this.y || player.x === this.x) {
+    this.bounderies === true;
+    console.log("yoooo les bounderies ca check ou pas ???")
+  }
+
+
+
+
+  // => contact player - item
+
+};
+
+function checkCarryPackage() {
+  items.forEach(function (oneItem) {
+    if (itemCollinsion(player, oneItem)) {
+
+      // Items moves and player moves are the same
+
+    }
+  });
+
+}

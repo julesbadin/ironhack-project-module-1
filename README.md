@@ -1,19 +1,17 @@
 **GAME RECIPE**
 
-
 ====================================
-=> Iteration one : 
+=> Iteration one :
 
+JS : function prompt and display user name
 
-JS : function prompt and display user name 
+HTML/CSS : home screen
 
-HTML/CSS : home screen 
-
-CANVAS : intro screen 
+CANVAS : intro screen
 
 CANVAS : play screen
 
--> draw Player 
+-> draw Player
 
 -> animate Player
 
@@ -21,30 +19,25 @@ CANVAS : play screen
 
 -> drawing loop
 
--> draw codeItems 
+-> draw codeItems
 
--> create randomizer to display codeItems 
+-> create randomizer to display codeItems
 
 -> create storageBacks (6)
 
 -> interaction between codeItems and storageBacks
 
-
 CANVAS : score screen
 
-
 ====================================
-=> Iteration two : 
+=> Iteration two :
 
 LEVELS : create levels (same room with some changes) :
 
 -> add a point of life feature
 
--> change a bit the design 
+-> change a bit the design
 
 -> add some nightmares ennemies (pacman style)
 
 -> add some powerup
-
-
-
