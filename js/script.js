@@ -4,22 +4,26 @@
 var canvas = document.querySelector("#game-on");
 var ctx = canvas.getContext("2d");
 var gameStarted = false;
+var score = 0;
+var addPoint;
 
 //=====================
 // draw Items 
 
 
-var codeType = ["javascript", "html", "css", "jQuery", "DOM", "canvas"];
-var randomCodeType = codeType[Math.floor(Math.random() * codeType.length)]
+// var codeType = ["javascript", "html", "css"];
+// var randomCodeType = "javascript"; //allItems[Math.floor(Math.random() * allItems.length)]
+
 
 class Item {
-  constructor(itemX, itemY, itemWidth, itemHeight, randomCodeType) {
+  constructor(itemX, itemY, itemWidth, itemHeight, itemType) {
     this.x = itemX;
     this.y = itemY;
     this.width = itemWidth;
     this.height = itemHeight;
-    this.type = randomCodeType;
-    this.carried = true;
+    this.type = itemType;
+    this.carried = false;
+    this.scored = false;
   }
 
   drawItem() {
@@ -38,21 +42,123 @@ class Item {
 }
 
 
-
-
-
 var allItems = [
-  new Item(475, 325, 50, 25, randomCodeType),
-  // new Item(475, 325, 50, 25, randomCodeType),
-  // new Item(475, 325, 50, 25, randomCodeType),
-  // new Item(475, 325, 50, 25, randomCodeType),
-  // new Item(475, 325, 50, 25, randomCodeType),
-  // new Item(475, 325, 50, 25, randomCodeType)
-
+  new Item(475, 325, 50, 25, "javascript"),
 ];
 
 
 
+
+
+
+
+//=====================
+// Draw Boxes with class
+
+
+
+
+
+class Box {
+  constructor(boxX, boxY, boxWidth, boxHeight, boxType) {
+    this.x = boxX;
+    this.y = boxY;
+    this.width = boxWidth;
+    this.height = boxHeight;
+    this.type = boxType;
+  }
+
+
+
+
+
+  drawBox() {
+    // var oneBox = allBoxes.indexOf();
+
+    ctx.fillStyle = 'silver';
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+
+    // if (oneBox.type == jsBox.type) {
+    //   ctx.fillStyle = 'black';
+    //   ctx.font = '20px arial';
+    //   ctx.fillText('JS', this.x + 40, this.width + 10);
+    // }
+
+    // if (oneBox.type == htmlBox.type) {
+    //   ctx.fillStyle = 'black';
+    //   ctx.font = '20px arial';
+    //   ctx.fillText('html', this.x + 40, this.width + 10);
+
+    // }
+
+    // if (oneBox.type == cssBox.type) {
+    //   ctx.fillStyle = 'black';
+    //   ctx.font = '20px arial';
+    //   ctx.fillText('css', this.x + 40, this.width + 10);
+
+    // }
+
+    // if (oneBox.type == canvasBox.type) {
+    //   ctx.fillStyle = 'black';
+    //   ctx.font = '20px arial';
+    //   ctx.fillText('canvas', this.x + 40, this.width + 10);
+
+    // }
+
+    // if (this.type === "css") {
+
+    //   ctx.fillStyle = 'black';
+    //   ctx.font = '20px arial';
+    //   ctx.fillText('css', this.x + 40, this.width + 10);
+    // }
+
+
+    // ctx.fillStyle = "grey";
+    // ctx.strokeStyle = "black";
+    // ctx.lineWidth = 3;
+
+    // ctx.strokeRect(70, 135, 10, 20);
+    // ctx.fillRect(70, 135, 10, 20);
+
+    // ctx.strokeRect(90, 135, 10, 20);
+    // ctx.fillRect(90, 135, 10, 20);
+    // ctx.strokeRect(110, 135, 10, 20);
+    // ctx.fillRect(110, 135, 10, 20);
+
+    ctx.fillStyle = 'silver';
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+
+  }
+}
+
+var allBoxes = [
+  jsBox = new Box(50, 50, 100, 100, "javascript"),
+  htmlBox = new Box(50, 250, 100, 100, "html"),
+  cssBox = new Box(50, 450, 100, 100, "css"),
+  jQueryBox = new Box(850, 50, 100, 100, "jquery"),
+  canvasBox = new Box(850, 250, 100, 100, "canvas"),
+  domBox = new Box(850, 450, 100, 100, "dom"),
+]
+
+
+
+// //===================
+// // draw boxes 2nd attempt 
+
+// function drawJsBox() {
+//   ctx.fillStyle = 'silver';
+//   ctx.fillRect(50, 50, 100, 100);
+//   boxType = "javascript";
+//   return boxType;
+// }
+
+// function drawHtmlBox() {
+//   ctx.fillStyle = 'silver';
+//   ctx.fillRect(50, 250, 100, 100);
+//   boxType = "html";
+//   return boxType;
+
+// }
 
 //=====================
 // Draw Player 
@@ -119,44 +225,6 @@ document.onkeydown = function (event) {
   };
 
 };
-
-
-//=====================
-// Draw Boxes
-
-
-class Box {
-  constructor(boxX, boxY, boxWidth, boxHeight, boxType) {
-    this.x = boxX;
-    this.y = boxY;
-    this.width = boxWidth;
-    this.height = boxHeight;
-    this.type = boxType;
-  }
-
-  drawBox() {
-
-
-    ctx.fillStyle = 'silver';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-  }
-
-}
-
-var allBoxes = [
-  new Box(50, 50, 100, 100, "javascript"),
-  new Box(50, 250, 100, 100, "html"),
-  new Box(50, 450, 100, 100, "css"),
-  new Box(850, 50, 100, 100, "jQuery"),
-  new Box(850, 250, 100, 100, "DOM"),
-  new Box(850, 450, 100, 100, "canvas")
-
-];
-
-// - check type between boxes and items
-
-
-
 //===================
 // Start game
 
@@ -196,11 +264,12 @@ function drawingLoop() {
   clearCanvas();
   drawRoom();
 
+  // drawJsBox();
+  // drawHtmlBox();
 
   allBoxes.forEach(function (oneBox) {
     oneBox.drawBox();
   });
-
   drawPlayer();
 
   allItems.forEach(function (oneItem) {
@@ -208,13 +277,16 @@ function drawingLoop() {
   });
   checkCarried();
   checkDrops();
+  // checkScore();
 
   requestAnimationFrame(function () {
     drawingLoop();
   });
+
 };
 
 introScreen();
+
 
 
 
@@ -231,6 +303,8 @@ function clearCanvas() {
 function drawRoom() {
 
   // Draw floor 
+
+
   ctx.fillStyle = "Wheat";
   ctx.strokeStyle = "Tan";
   ctx.lineWidth = 3;
@@ -365,12 +439,7 @@ function drawRoom() {
 
 
   // rigth
-  ctx.fillStyle = "black";
-  ctx.strokeStyle = "grey";
-  ctx.lineWidth = 3;
 
-  ctx.strokeRect(90, 135, 20, 30);
-  ctx.fillRect(90, 135, 20, 30);
 
   ctx.fillStyle = "DarkSlateGrey";
   ctx.strokeStyle = "silver";
@@ -436,28 +505,32 @@ function drawRoom() {
 
 
 
-
 //=====================
 // Items to be carried:
+function itemSelection() {
+  selectItem = allItems[allItems.length - 1];
+
+  return selectItem
+}
 
 
 
-function itemToBeCarry(player, oneItem) {
-  var oneItem = allItems[Math.floor(Math.random() * allItems.length)]
+function itemToBeCarry(player) {
+  itemSelection();
 
   return (
-    player.x > oneItem.x &&
-    player.x < oneItem.x + Item.width &&
-    player.y > oneItem.y &&
-    player.y < oneItem.y + oneItem.height
+    player.x > selectItem.x &&
+    player.x < selectItem.x + selectItem.width &&
+    player.y > selectItem.y &&
+    player.y < selectItem.y + selectItem.height
 
   )
 }
 
 function checkCarried() {
-  allItems.forEach(function (oneItem) {
+  allItems.forEach(function () {
     if (itemToBeCarry(player)) {
-      oneItem.carried = true
+      selectItem.carried = true
     }
   });
 }
@@ -467,32 +540,75 @@ function checkCarried() {
 
 
 
+
 function itemToBeDrop(oneItem) {
 
-  var jsBox = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > -100 && oneItem.y < 150;
-  var htmlBox = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > 250 && oneItem.y < 350;
-  var cssBox = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > 450 && oneItem.y < 550;
+  var jsDrop = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > -100 && oneItem.y < 150;
+  var htmlDrop = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > 250 && oneItem.y < 350;
+  var cssDrop = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > 450 && oneItem.y < 550;
 
-  if (oneItem = jsBox) {
-    return jsBox
+
+  if (jsDrop) {
+
+    if (!oneItem.scored) {
+      score += 20;
+
+      allItems.push(new Item(375, 325, 50, 25, "html"));
+      oneItem.scored = true;
+    }
+    console.log(score);
+    return jsDrop
+
   }
 
-  if (oneItem = htmlBox) {
-    return htmlBox
+  if (htmlDrop) {
+
+    if (!oneItem.scored) {
+      score += 20;
+
+      allItems.push(new Item(475, 325, 50, 25, "css"));
+      oneItem.scored = true;
+
+      console.log('html foucking helllll')
+    }
+    console.log(score);
+    return htmlDrop
   }
 
-  if (oneItem = cssBox) {
-    return cssBox
-  }
+  if (cssDrop) {
+    if (!oneItem.scored) {
+      score += 20;
 
+      allItems.push(new Item(375, 325, 50, 25, "canvas"));
+      oneItem.scored = true;
+
+      console.log('css foucking helllll')
+    }
+    console.log(score);
+    return cssDrop
+  }
 
 }
+
+
+
+
 
 function checkDrops() {
   allItems.forEach(function (oneItem) {
     if (itemToBeDrop(player)) {
-      oneItem.carried = false
+      oneItem.carried = false;
+
+      // create a new Item or make one form the array appear here ? each time smth's dropped
+
+
+      // if (itemToBeDrop(player)) {
+      //   selectItem.carried = false
+
+      // }
 
     }
+
   });
+
 }
