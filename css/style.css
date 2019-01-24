@@ -6,7 +6,6 @@ body {
   background-position: center center;
 }
 
-
 .flex {
   display: flex;
   justify-content: space-around;
@@ -14,21 +13,29 @@ body {
 
 nav li {
   list-style: none;
-  display: inline;
-  text-decoration: none;
-  margin: 0 0px;
-
-
 }
 
 nav a {
-
+  background-color: tomato;
+  border: 3px solid red;
+  padding: 10px 40px;
+  text-align: left;
   font-size: 1.7em;
   text-decoration: none;
-  background-color: tomato;
   color: white;
   text-shadow: 2px 2px 0px silver;
-  padding: 7px 15px;
-  border: 3px solid red;
-  margin: 0 0;
+}
+
+nav {
+  margin-bottom: 10px;
+}
+
+footer {
+  margin-top: -150px;
+  color: silver;
+}
+
+footer a {
+  text-decoration: none;
+  color: darkslategrey;
 }
