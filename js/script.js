@@ -8,12 +8,13 @@ var score = 0;
 var addPoint;
 
 //=====================
-// draw Items 
+// draw Items
 
-
-// var codeType = ["javascript", "html", "css"];
-// var randomCodeType = "javascript"; //allItems[Math.floor(Math.random() * allItems.length)]
-
+function getRandomCodeType() {
+  var codeType = ["javascript", "html", "css"];
+  var randomCodeType = codeType[Math.floor(Math.random() * codeType.length)]
+  return randomCodeType;
+}
 
 class Item {
   constructor(itemX, itemY, itemWidth, itemHeight, itemType) {
@@ -27,37 +28,20 @@ class Item {
   }
 
   drawItem() {
-
     if (this.carried) {
       this.x = player.x;
       this.y = player.y - 15;
-
-    } else {
-
-    }
-    ctx.fillStyle = 'white';
+    } else {}
+    ctx.fillStyle = "white";
     ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.fillText(this.type, this.x, this.y);
   }
-
 }
 
-
-var allItems = [
-  new Item(475, 325, 50, 25, "javascript"),
-];
-
-
-
-
-
-
+var allItems = [new Item(475, 325, 50, 25, "javascript")];
 
 //=====================
 // Draw Boxes with class
-
-
-
-
 
 class Box {
   constructor(boxX, boxY, boxWidth, boxHeight, boxType) {
@@ -67,83 +51,65 @@ class Box {
     this.height = boxHeight;
     this.type = boxType;
   }
-
-
-
-
-
-  drawBox() {
-    // var oneBox = allBoxes.indexOf();
-
-    ctx.fillStyle = 'silver';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-
-    // if (oneBox.type == jsBox.type) {
-    //   ctx.fillStyle = 'black';
-    //   ctx.font = '20px arial';
-    //   ctx.fillText('JS', this.x + 40, this.width + 10);
-    // }
-
-    // if (oneBox.type == htmlBox.type) {
-    //   ctx.fillStyle = 'black';
-    //   ctx.font = '20px arial';
-    //   ctx.fillText('html', this.x + 40, this.width + 10);
-
-    // }
-
-    // if (oneBox.type == cssBox.type) {
-    //   ctx.fillStyle = 'black';
-    //   ctx.font = '20px arial';
-    //   ctx.fillText('css', this.x + 40, this.width + 10);
-
-    // }
-
-    // if (oneBox.type == canvasBox.type) {
-    //   ctx.fillStyle = 'black';
-    //   ctx.font = '20px arial';
-    //   ctx.fillText('canvas', this.x + 40, this.width + 10);
-
-    // }
-
-    // if (this.type === "css") {
-
-    //   ctx.fillStyle = 'black';
-    //   ctx.font = '20px arial';
-    //   ctx.fillText('css', this.x + 40, this.width + 10);
-    // }
-
-
-    // ctx.fillStyle = "grey";
-    // ctx.strokeStyle = "black";
-    // ctx.lineWidth = 3;
-
-    // ctx.strokeRect(70, 135, 10, 20);
-    // ctx.fillRect(70, 135, 10, 20);
-
-    // ctx.strokeRect(90, 135, 10, 20);
-    // ctx.fillRect(90, 135, 10, 20);
-    // ctx.strokeRect(110, 135, 10, 20);
-    // ctx.fillRect(110, 135, 10, 20);
-
-    ctx.fillStyle = 'silver';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-
-  }
 }
 
-var allBoxes = [
-  jsBox = new Box(50, 50, 100, 100, "javascript"),
-  htmlBox = new Box(50, 250, 100, 100, "html"),
-  cssBox = new Box(50, 450, 100, 100, "css"),
-  jQueryBox = new Box(850, 50, 100, 100, "jquery"),
-  canvasBox = new Box(850, 250, 100, 100, "canvas"),
-  domBox = new Box(850, 450, 100, 100, "dom"),
-]
+var jsBox = new Box(50, 50, 100, 100, "javascript");
+var htmlBox = new Box(50, 250, 100, 100, "html");
+var cssBox = new Box(50, 450, 100, 100, "css");
+var jQueryBox = new Box(850, 50, 100, 100, "jquery");
+var canvasBox = new Box(850, 250, 100, 100, "canvas");
+var domBox = new Box(850, 450, 100, 100, "dom");
 
+function drawBox() {
+  // var oneBox = allBoxes.indexOf();
 
+  ctx.fillStyle = "silver";
+  ctx.fillRect(this.x, this.y, this.width, this.height);
+
+  // if (this.type === "javascript") {
+  //   ctx.fillStyle = "black";
+  //   ctx.font = "20px arial";
+  //   ctx.fillText("JS", this.x + 40, this.width + 10);
+  // } else if (this.type === "html") {
+  //   ctx.fillStyle = "black";
+  //   ctx.font = "20px arial";
+  //   ctx.fillText("html", this.x + 40, this.width + 10);
+  // } else if (this.type === "css") {
+  //   ctx.fillStyle = "black";
+  //   ctx.font = "20px arial";
+  //   ctx.fillText("css", this.x + 40, this.width + 10);
+  // } else if (this.type === "canvas") {
+  //   ctx.fillStyle = "black";
+  //   ctx.font = "20px arial";
+  //   ctx.fillText("canvas", this.x + 40, this.width + 10);
+  // } else if (this.type === "jquery") {
+  //   ctx.fillStyle = "black";
+  //   ctx.font = "20px arial";
+  //   ctx.fillText("jQuery", this.x + 40, this.width + 10);
+  // } else if (this.type === "dom") {
+  //   ctx.fillStyle = "black";
+  //   ctx.font = "20px arial";
+  //   ctx.fillText("DOM", this.x + 40, this.width + 10);
+  // }
+
+  // ctx.fillStyle = "grey";
+  // ctx.strokeStyle = "black";
+  // ctx.lineWidth = 3;
+
+  // ctx.strokeRect(70, 135, 10, 20);
+  // ctx.fillRect(70, 135, 10, 20);
+
+  // ctx.strokeRect(90, 135, 10, 20);
+  // ctx.fillRect(90, 135, 10, 20);
+  // ctx.strokeRect(110, 135, 10, 20);
+  // ctx.fillRect(110, 135, 10, 20);
+
+  ctx.fillStyle = "silver";
+  ctx.fillRect(this.x, this.y, this.width, this.height);
+}
 
 // //===================
-// // draw boxes 2nd attempt 
+// // draw boxes 2nd attempt
 
 // function drawJsBox() {
 //   ctx.fillStyle = 'silver';
@@ -161,73 +127,82 @@ var allBoxes = [
 // }
 
 //=====================
-// Draw Player 
+// Draw Player
 
-var playerImg = new Image();
-playerImg.src = "./images/ash.png";
-playerImg.onload = function () {
-  drawPlayer()
-};
+var playerLeftImg = new Image();
+playerLeftImg.src = "./images/leftAsh.png";
+
+var playerRightImg = new Image();
+playerRightImg.src = "./images/rightAsh.png";
+
+var playerFrontImg = new Image();
+playerFrontImg.src = "./images/frontAsh.png";
+
+var playerBackImg = new Image();
+playerBackImg.src = "./images/backAsh.png";
 
 var player = {
   x: 475,
   y: 250,
   width: 50,
   height: 50,
+  img: playerFrontImg
 };
+
 
 function drawPlayer() {
-  ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
-};
-
+  ctx.drawImage(player.img, player.x, player.y, player.width, player.height);
+}
 
 // Player's moves
 
 document.onkeydown = function (event) {
 
-
   if (player.y < 30) {
-    player.y = 30
+    player.y = 30;
   }
 
   if (player.x < 30) {
-    player.x = 30
+    player.x = 30;
   }
 
   if (player.y > 530) {
-    player.y = 530
+    player.y = 530;
   }
 
   if (player.x > 930) {
-    player.x = 930
+    player.x = 930;
   }
 
   switch (event.keyCode) {
     case 37:
       event.preventDefault();
+      player.img = playerLeftImg;
       player.x -= 20;
       break;
 
     case 38:
       event.preventDefault();
+      player.img = playerBackImg;
       player.y -= 20;
       break;
 
     case 39:
       event.preventDefault();
+      player.img = playerRightImg;
       player.x += 20;
       break;
 
     case 40:
       event.preventDefault();
+      player.img = playerFrontImg;
       player.y += 20;
       break;
-  };
+  }
 
 };
 //===================
 // Start game
-
 
 function introScreen() {
   ctx.fillStyle = "black";
@@ -238,72 +213,53 @@ function introScreen() {
   ctx.fillText("GAME YOUR BRAIN", canvas.width / 2, canvas.height / 2);
 
   ctx.font = "20px Arial";
-  ctx.fillText("Press Enter To Brain", canvas.width / 2, canvas.height / 2 + 50);
-
+  ctx.fillText(
+    "Press Enter To Brain",
+    canvas.width / 2,
+    canvas.height / 2 + 50
+  );
 
   document.body.addEventListener("keydown", function (event) {
-
     if (event.keyCode == 13 && !gameStarted) {
       // Drawing loop execution
       drawingLoop();
-
     }
-
   });
 }
-
 
 //=====================
 // Drawing loop description
 
-
-
 function drawingLoop() {
-
   // erase the whole canvas before re-drawing it (x, y, width, height)
   clearCanvas();
   drawRoom();
-
-  // drawJsBox();
-  // drawHtmlBox();
-
-  allBoxes.forEach(function (oneBox) {
-    oneBox.drawBox();
-  });
+  drawBox();
   drawPlayer();
 
   allItems.forEach(function (oneItem) {
     oneItem.drawItem();
   });
   checkCarried();
-  checkDrops();
+  checkPlayerDrop();
   // checkScore();
 
   requestAnimationFrame(function () {
     drawingLoop();
   });
-
-};
+}
 
 introScreen();
 
-
-
-
 //=====================
 
-
-
 function clearCanvas() {
-  ctx.clearRect(0, 0, 1000, 600);
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
-
 
 //Draw the room :
 function drawRoom() {
-
-  // Draw floor 
-
+  // Draw floor
 
   ctx.fillStyle = "Wheat";
   ctx.strokeStyle = "Tan";
@@ -369,13 +325,30 @@ function drawRoom() {
   ctx.strokeRect(700, 500, 200, 100);
   ctx.strokeRect(900, 500, 200, 100);
 
-
-
-
   // --Draw the desk :
 
-  // ctx.fillStyle = "grey";
+  // ctx.fillStyle = "brown";
   // ctx.fillRect(400, 300, 200, 75)
+
+  // Draw languges names :
+
+
+  ctx.font = "25px arial";
+
+  ctx.fillStyle = "tomato";
+  ctx.fillText("<= JS", 350, 120);
+  ctx.fillStyle = "blue";
+  ctx.fillText("<= HTML", 350, 320);
+  ctx.fillStyle = "limegreen";
+  ctx.fillText("<= CSS", 350, 520);
+
+  ctx.fillStyle = "indogo";
+  ctx.fillText("Canvas =>", 650, 120);
+  ctx.fillStyle = "darkgreen";
+  ctx.fillText("jQuery =>", 650, 320);
+  ctx.fillStyle = "hotpink";
+  ctx.fillText("DOM =>", 650, 520);
+
 
 
   // --Draw walls :
@@ -415,11 +388,11 @@ function drawRoom() {
   ctx.strokeRect(955, 0, 15, 600);
   ctx.fillRect(955, 0, 15, 600);
 
+
+
   // Draw transfo
 
   // left
-
-
 
   ctx.fillStyle = "DarkSlateGrey";
   ctx.strokeStyle = "silver";
@@ -437,9 +410,7 @@ function drawRoom() {
   ctx.fillStyle = "blue";
   ctx.fillRect(238, 12, 6, 6);
 
-
   // rigth
-
 
   ctx.fillStyle = "DarkSlateGrey";
   ctx.strokeStyle = "silver";
@@ -464,7 +435,6 @@ function drawRoom() {
 
   //left side brain
 
-
   ctx.strokeRect(270, 45, 5, 70);
   ctx.fillRect(270, 45, 5, 70);
   ctx.strokeRect(145, 110, 130, 5);
@@ -479,9 +449,6 @@ function drawRoom() {
   ctx.fillRect(255, 45, 5, 470);
   ctx.strokeRect(145, 510, 115, 5);
   ctx.fillRect(145, 510, 115, 5);
-
-
-
 
   //right side brain
 
@@ -500,20 +467,107 @@ function drawRoom() {
   ctx.strokeRect(745, 510, 115, 5);
   ctx.fillRect(745, 510, 115, 5);
 
+  // boxes background
 
-};
+  ctx.fillStyle = "DarkSlateGrey";
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 3;
+
+  ctx.strokeRect(50, 50, 100, 100);
+  ctx.fillRect(50, 50, 100, 100);
+
+  ctx.strokeRect(50, 250, 100, 100);
+  ctx.fillRect(50, 250, 100, 100);
+
+  ctx.strokeRect(50, 450, 100, 100);
+  ctx.fillRect(50, 450, 100, 100);
+
+  ctx.strokeRect(850, 50, 100, 100);
+  ctx.fillRect(850, 50, 100, 100);
+
+  ctx.strokeRect(850, 250, 100, 100);
+  ctx.fillRect(850, 250, 100, 100);
+
+  ctx.strokeRect(850, 450, 100, 100);
+  ctx.fillRect(850, 450, 100, 100);
+
+  // inner rects 
+  ctx.fillStyle = "black";
+  ctx.strokeStyle = "silver";
+  ctx.lineWidth = 3;
+
+  // - box 1
+  ctx.strokeRect(70, 70, 60, 15);
+  ctx.fillRect(70, 70, 60, 15);
+  ctx.strokeRect(70, 85, 60, 15);
+  ctx.fillRect(70, 85, 60, 15);
+  ctx.strokeRect(70, 100, 60, 15);
+  ctx.fillRect(70, 100, 60, 15);
+  ctx.strokeRect(70, 115, 60, 15);
+  ctx.fillRect(70, 115, 60, 15);
 
 
+
+  // - box 2
+  ctx.strokeRect(70, 270, 60, 15);
+  ctx.fillRect(70, 270, 60, 15);
+  ctx.strokeRect(70, 285, 60, 15);
+  ctx.fillRect(70, 285, 60, 15);
+  ctx.strokeRect(70, 300, 60, 15);
+  ctx.fillRect(70, 300, 60, 15);
+  ctx.strokeRect(70, 315, 60, 15);
+  ctx.fillRect(70, 315, 60, 15);
+
+  // - box 3
+  ctx.strokeRect(70, 470, 60, 15);
+  ctx.fillRect(70, 470, 60, 15);
+  ctx.strokeRect(70, 485, 60, 15);
+  ctx.fillRect(70, 485, 60, 15);
+  ctx.strokeRect(70, 500, 60, 15);
+  ctx.fillRect(70, 500, 60, 15);
+  ctx.strokeRect(70, 515, 60, 15);
+  ctx.fillRect(70, 515, 60, 15);
+
+  // - box 4
+  ctx.strokeRect(870, 70, 60, 15);
+  ctx.fillRect(870, 70, 60, 15);
+  ctx.strokeRect(870, 85, 60, 15);
+  ctx.fillRect(870, 85, 60, 15);
+  ctx.strokeRect(870, 100, 60, 15);
+  ctx.fillRect(870, 100, 60, 15);
+  ctx.strokeRect(870, 115, 60, 15);
+  ctx.fillRect(870, 115, 60, 15);
+
+  // - box 5
+  ctx.strokeRect(870, 270, 60, 15);
+  ctx.fillRect(870, 270, 60, 15);
+  ctx.strokeRect(870, 285, 60, 15);
+  ctx.fillRect(870, 285, 60, 15);
+  ctx.strokeRect(870, 300, 60, 15);
+  ctx.fillRect(870, 300, 60, 15);
+  ctx.strokeRect(870, 315, 60, 15);
+  ctx.fillRect(870, 315, 60, 15);
+
+  // - box 6
+  ctx.strokeRect(870, 470, 60, 15);
+  ctx.fillRect(870, 470, 60, 15);
+  ctx.strokeRect(870, 485, 60, 15);
+  ctx.fillRect(870, 485, 60, 15);
+  ctx.strokeRect(870, 500, 60, 15);
+  ctx.fillRect(870, 500, 60, 15);
+  ctx.strokeRect(870, 515, 60, 15);
+  ctx.fillRect(870, 515, 60, 15);
+
+
+}
 
 //=====================
 // Items to be carried:
 function itemSelection() {
   selectItem = allItems[allItems.length - 1];
 
-  return selectItem
+  return selectItem;
 }
-
-
 
 function itemToBeCarry(player) {
   itemSelection();
@@ -523,14 +577,13 @@ function itemToBeCarry(player) {
     player.x < selectItem.x + selectItem.width &&
     player.y > selectItem.y &&
     player.y < selectItem.y + selectItem.height
-
-  )
+  );
 }
 
 function checkCarried() {
   allItems.forEach(function () {
     if (itemToBeCarry(player)) {
-      selectItem.carried = true
+      selectItem.carried = true;
     }
   });
 }
@@ -538,77 +591,51 @@ function checkCarried() {
 //=====================
 // Items to be dropped
 
+function checkPlayerDrop() {
+  itemSelection();
 
-
-
-function itemToBeDrop(oneItem) {
-
-  var jsDrop = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > -100 && oneItem.y < 150;
-  var htmlDrop = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > 250 && oneItem.y < 350;
-  var cssDrop = oneItem.x > 0 && oneItem.x < 100 && oneItem.y > 450 && oneItem.y < 550;
-
-
-  if (jsDrop) {
-
-    if (!oneItem.scored) {
-      score += 20;
-
-      allItems.push(new Item(375, 325, 50, 25, "html"));
-      oneItem.scored = true;
-    }
-    console.log(score);
-    return jsDrop
-
+  if (!selectItem.carried) {
+    return;
   }
 
-  if (htmlDrop) {
+  var jsDrop =
+    player.x > 0 && player.x < 100 && player.y > -100 && player.y < 150;
+  var htmlDrop =
+    player.x > 0 && player.x < 100 && player.y > 250 && player.y < 350;
+  var cssDrop =
+    player.x > 0 && player.x < 100 && player.y > 450 && player.y < 550;
 
-    if (!oneItem.scored) {
+  if (jsDrop && !selectItem.scored) {
+    if (selectItem.type == "javascript") {
       score += 20;
-
-      allItems.push(new Item(475, 325, 50, 25, "css"));
-      oneItem.scored = true;
-
-      console.log('html foucking helllll')
+      console.log("pountos working js", score);
     }
-    console.log(score);
-    return htmlDrop
+    selectItem.scored = true;
+    selectItem.carried = false;
+    allItems.push(new Item(575, 325, 50, 25, getRandomCodeType()));
+    console.log("js foucking helllll");
   }
 
-  if (cssDrop) {
-    if (!oneItem.scored) {
+
+  if (htmlDrop && !selectItem.scored) {
+    if (selectItem.type == "html") {
       score += 20;
-
-      allItems.push(new Item(375, 325, 50, 25, "canvas"));
-      oneItem.scored = true;
-
-      console.log('css foucking helllll')
+      console.log("pountos working html", score);
     }
-    console.log(score);
-    return cssDrop
+    selectItem.scored = true;
+    selectItem.carried = false;
+    allItems.push(new Item(475, 325, 50, 25, getRandomCodeType()));
+    console.log("html foucking helllll");
   }
 
-}
-
-
-
-
-
-function checkDrops() {
-  allItems.forEach(function (oneItem) {
-    if (itemToBeDrop(player)) {
-      oneItem.carried = false;
-
-      // create a new Item or make one form the array appear here ? each time smth's dropped
-
-
-      // if (itemToBeDrop(player)) {
-      //   selectItem.carried = false
-
-      // }
-
+  if (cssDrop && !selectItem.scored) {
+    if (selectItem.type == "css") {
+      score += 20;
+      console.log("pountos working css", score);
     }
-
-  });
-
+    selectItem.scored = true;
+    selectItem.carried = false;
+    allItems.push(new Item(375, 325, 50, 25, getRandomCodeType()));
+    console.log("css foucking helllll");
+  }
 }
