@@ -337,8 +337,6 @@ window.onclick = function(event) {
 // Drawing loop description
 
 function drawingLoop() {
-  // erase the whole canvas before re-drawing it (x, y, width, height)
-
   clearCanvas();
   drawRoom();
   drawBox();
@@ -429,11 +427,6 @@ function drawRoom() {
   ctx.strokeRect(500, 500, 200, 100);
   ctx.strokeRect(700, 500, 200, 100);
   ctx.strokeRect(900, 500, 200, 100);
-
-  // --Draw the desk :
-
-  // ctx.fillStyle = "brown";
-  // ctx.fillRect(400, 300, 200, 75)
 
   // Draw languges names :
 
