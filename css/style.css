@@ -62,9 +62,8 @@ footer a {
   margin: 3% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 1000px;
-  height: 600px;
-  position: sticky;
+  width: 1300px;
+  height: 550px;
   font-size: 25px;
 }
 
@@ -100,4 +99,22 @@ footer a {
   color: tomato;
   text-decoration: none;
   cursor: pointer;
+}
+
+.timer {
+  position: absolute;
+  top: 400px;
+  left: 60px;
+  color: tomato;
+  font-size: 100px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.scoreScreen {
+  position: absolute;
+  top: 400px;
+  right: 60px;
+  color: blue;
+  font-size: 100px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

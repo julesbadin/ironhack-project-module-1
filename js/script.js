@@ -29,15 +29,13 @@ var player = {
   img: playerFrontImg
 };
 
-
 function drawPlayer() {
   ctx.drawImage(player.img, player.x, player.y, player.width, player.height);
 }
 
 // Player's moves
 
-document.onkeydown = function (event) {
-
+document.onkeydown = function(event) {
   if (player.y < 30) {
     player.y = 30;
   }
@@ -79,16 +77,14 @@ document.onkeydown = function (event) {
       player.y += 20;
       break;
   }
-
 };
 
 //=====================
 // draw Items
 
 function getRandomCodeType() {
-
   var codeType = ["javascript", "html", "css", "canvas", "jquery", "dom"];
-  var randomCodeType = codeType[Math.floor(Math.random() * codeType.length)]
+  var randomCodeType = codeType[Math.floor(Math.random() * codeType.length)];
   return randomCodeType;
 }
 
@@ -96,20 +92,27 @@ var htmlCode = ["<body>", "id='brain'", "class=''''", "<br/>"];
 var randomHtmlCode = htmlCode[Math.floor(Math.random() * htmlCode.length)];
 
 var javascriptCode = ["this.brain", "class Item{}", ".splice()", "Math.random"];
-var randomJavascriptCode = javascriptCode[Math.floor(Math.random() * javascriptCode.length)];
+var randomJavascriptCode =
+  javascriptCode[Math.floor(Math.random() * javascriptCode.length)];
 
 var cssCode = ["border", ".brain", "[a^='b']", "overflow"];
 var randomCssCode = cssCode[Math.floor(Math.random() * cssCode.length)];
 
-var canvasCode = ["ctx.fillText", "addEventListener", "strokeRect", "clearRect"];
-var randomCanvasCode = canvasCode[Math.floor(Math.random() * canvasCode.length)];
+var canvasCode = [
+  "ctx.fillText",
+  "addEventListener",
+  "strokeRect",
+  "clearRect"
+];
+var randomCanvasCode =
+  canvasCode[Math.floor(Math.random() * canvasCode.length)];
 
 var jqueryCode = ["$('btn')", ".show()", ".fadeIn(,)", ".click()"];
-var randomJqueryCode = jqueryCode[Math.floor(Math.random() * jqueryCode.length)];
+var randomJqueryCode =
+  jqueryCode[Math.floor(Math.random() * jqueryCode.length)];
 
 var domCode = ["EventTarget()", ".innerHTML()", ".replaceChild()", ".onclick"];
 var randomDomCode = domCode[Math.floor(Math.random() * domCode.length)];
-
 
 class Item {
   constructor(itemX, itemY, itemWidth, itemHeight, itemType) {
@@ -140,64 +143,43 @@ class Item {
     ctx.fillStyle = "black";
     ctx.fillRect(this.x + 27, this.y + 3, 5, 10);
 
-
-
-
-
-
     if (this.type == "html" && this.carried) {
-
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
       ctx.fillText(randomHtmlCode, 500, 60);
-
     }
     if (this.type == "javascript" && this.carried) {
-
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
       ctx.fillText(randomJavascriptCode, 500, 60);
-
     }
     if (this.type == "css" && this.carried) {
-
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
       ctx.fillText(randomCssCode, 500, 60);
-
     }
 
     if (this.type == "canvas" && this.carried) {
-
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
       ctx.fillText(randomCanvasCode, 500, 60);
     }
 
     if (this.type == "jquery" && this.carried) {
-
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
       ctx.fillText(randomJqueryCode, 500, 60);
-
     }
 
     if (this.type == "dom" && this.carried) {
-
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
       ctx.fillText(randomDomCode, 500, 60);
-
     }
-
-
   }
 }
 
 var allItems = [new Item(475, 325, 50, 50, getRandomCodeType())];
-
-
-
 
 //=====================
 // Draw Boxes with class
@@ -220,10 +202,8 @@ var canvasBox = new Box(850, 250, 100, 100, "canvas");
 var domBox = new Box(850, 450, 100, 100, "dom");
 
 function drawBox() {
-
   ctx.fillStyle = "silver";
   ctx.fillRect(this.x, this.y, this.width, this.height);
-
 }
 
 //===================
@@ -238,11 +218,23 @@ function introScreen() {
   ctx.fillText("GAME YOUR BRAIN", canvas.width / 2, canvas.height / 2 - 150);
   ctx.font = "30px Impact";
   ctx.fillStyle = "silver";
-  ctx.fillText("Help Ash, an IronHack student to organized learnings in his brain", canvas.width / 2, canvas.height / 2 - 70);
+  ctx.fillText(
+    "Help Ash, an IronHack student to organized learnings in his brain",
+    canvas.width / 2,
+    canvas.height / 2 - 70
+  );
   ctx.font = "25px arial";
 
-  ctx.fillText("Goal is to take the disk, see on the screen what's on it", canvas.width / 2, canvas.height / 2 - 30);
-  ctx.fillText("and store it in the right server.", canvas.width / 2, canvas.height / 2);
+  ctx.fillText(
+    "Goal is to take the disk, see on the screen what's on it",
+    canvas.width / 2,
+    canvas.height / 2 - 30
+  );
+  ctx.fillText(
+    "and store it in the right server.",
+    canvas.width / 2,
+    canvas.height / 2
+  );
 
   ctx.fillStyle = "tomato";
   ctx.font = "30px Arial";
@@ -252,60 +244,94 @@ function introScreen() {
     canvas.height / 2 + 50
   );
 
-  document.body.addEventListener("keydown", function (event) {
+  document.body.addEventListener("keydown", function(event) {
     if (event.keyCode == 13 && !gameStarted) {
+      gameStarted = true;
+
+      //start Timer and score
+      timer();
       // Drawing loop execution
       drawingLoop();
-      return stopPlaying
-
+      return (stopPlaying = setTimeout("endScreen()", 11000));
     }
   });
+}
 
+//===================
+// Timer and score display:
+var h2Time = document.getElementsByClassName("timer")[0],
+  seconds = 0,
+  t;
+
+function add() {
+  if (gameStarted) {
+    seconds++;
+    h2Time.textContent = seconds > 9 ? seconds : "0" + seconds;
+    timer();
+  }
+}
+
+function timer() {
+  t = setTimeout(add, 1000);
+}
+timer();
+
+/* Stop button */
+function stopTimer() {
+  clearTimeout(t);
+}
+
+// - score :
+
+var h2Score = document.getElementsByClassName("scoreScreen")[0],
+  score = 0;
+
+function addScore() {
+  if (gameStarted) {
+    h2Score.textContent = score;
+  }
+}
+
+var spanScore = document.getElementsByClassName("display-score")[0],
+  score = 0;
+
+function finalScore() {
+  spanScore.textContent = score;
 }
 
 //===================
 // End game and modal
-var finalScore = document.getElementsByClassName("display-score").innerHTML = ('34');
-var stopPlaying = setTimeout("endScreen()", 2000);
-
-
 function endScreen() {
-
   console.log("Stop playing noob.");
+
   openModal();
-  finalScore;
-
-
-
-
+  finalScore();
+  stopTimer();
 }
 
 // - modal ----------------
 
-var modal = document.getElementById('myModal');
+var modal = document.getElementById("myModal");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-
-// open the modal 
+// open the modal
 function openModal() {
   modal.style.display = "block";
 }
 
-
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  document.location.reload(true)
-}
+span.onclick = function() {
+  document.location.reload(true);
+};
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
-
+};
 
 //=====================
 // Drawing loop description
@@ -317,25 +343,23 @@ function drawingLoop() {
   drawRoom();
   drawBox();
   drawPlayer();
-
-  allItems.forEach(function (oneItem) {
+  addScore();
+  allItems.forEach(function(oneItem) {
     oneItem.drawItem();
   });
   checkCarried();
   checkPlayerDrop();
 
-
-  requestAnimationFrame(function () {
+  requestAnimationFrame(function() {
     drawingLoop();
   });
 }
 introScreen();
 
-
 //=====================
 
 function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 //Draw the room :
@@ -413,7 +437,6 @@ function drawRoom() {
 
   // Draw languges names :
 
-
   ctx.font = "20px arial";
 
   ctx.fillStyle = "tomato";
@@ -429,8 +452,6 @@ function drawRoom() {
   ctx.fillText("jQuery =>", 650, 320);
   ctx.fillStyle = "hotpink";
   ctx.fillText("DOM =>", 650, 520);
-
-
 
   // --Draw walls :
   ctx.fillStyle = "maroon";
@@ -469,7 +490,7 @@ function drawRoom() {
   ctx.strokeRect(955, 0, 15, 600);
   ctx.fillRect(955, 0, 15, 600);
 
-  // draw screen 
+  // draw screen
 
   ctx.fillStyle = "DarkSlateGrey";
   ctx.strokeStyle = "silver";
@@ -482,7 +503,6 @@ function drawRoom() {
   ctx.strokeStyle = "silver";
   ctx.strokeRect(400, 20, 200, 75);
   ctx.fillRect(400, 20, 200, 75);
-
 
   // Draw transfo
 
@@ -585,7 +605,7 @@ function drawRoom() {
   ctx.strokeRect(850, 450, 100, 100);
   ctx.fillRect(850, 450, 100, 100);
 
-  // inner rects 
+  // inner rects
   ctx.fillStyle = "black";
   ctx.strokeStyle = "silver";
   ctx.lineWidth = 3;
@@ -599,8 +619,6 @@ function drawRoom() {
   ctx.fillRect(70, 100, 60, 15);
   ctx.strokeRect(70, 115, 60, 15);
   ctx.fillRect(70, 115, 60, 15);
-
-
 
   // - box 2
   ctx.strokeRect(70, 270, 60, 15);
@@ -651,8 +669,6 @@ function drawRoom() {
   ctx.fillRect(870, 500, 60, 15);
   ctx.strokeRect(870, 515, 60, 15);
   ctx.fillRect(870, 515, 60, 15);
-
-
 }
 
 //=====================
@@ -675,7 +691,7 @@ function itemToBeCarry(player) {
 }
 
 function checkCarried() {
-  allItems.forEach(function () {
+  allItems.forEach(function() {
     if (itemToBeCarry(player)) {
       selectItem.carried = true;
     }
@@ -717,7 +733,6 @@ function checkPlayerDrop() {
     console.log("js foucking helllll");
   }
 
-
   if (htmlDrop && !selectItem.scored) {
     if (selectItem.type == "html") {
       score += 20;
@@ -739,7 +754,6 @@ function checkPlayerDrop() {
     allItems.push(new Item(375, 325, 50, 50, getRandomCodeType()));
     console.log("css foucking helllll");
   }
-
 
   if (canvasDrop && !selectItem.scored) {
     if (selectItem.type == "canvas") {
@@ -772,5 +786,4 @@ function checkPlayerDrop() {
     allItems.push(new Item(475, 325, 50, 50, getRandomCodeType()));
     console.log("dom foucking helllll");
   }
-
 }
