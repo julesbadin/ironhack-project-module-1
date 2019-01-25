@@ -149,21 +149,21 @@ class Item {
 
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
-      ctx.fillText(randomHtmlCode, 500, 70);
+      ctx.fillText(randomHtmlCode, 500, 60);
 
     }
     if (this.type == "javascript" && this.carried) {
 
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
-      ctx.fillText(randomJavascriptCode, 500, 70);
+      ctx.fillText(randomJavascriptCode, 500, 60);
 
     }
     if (this.type == "css" && this.carried) {
 
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
-      ctx.fillText(randomCssCode, 500, 70);
+      ctx.fillText(randomCssCode, 500, 60);
 
     }
 
@@ -171,14 +171,14 @@ class Item {
 
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
-      ctx.fillText(randomCanvasCode, 500, 70);
+      ctx.fillText(randomCanvasCode, 500, 60);
     }
 
     if (this.type == "jquery" && this.carried) {
 
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
-      ctx.fillText(randomJqueryCode, 500, 70);
+      ctx.fillText(randomJqueryCode, 500, 60);
 
     }
 
@@ -186,7 +186,7 @@ class Item {
 
       ctx.fillStyle = "white";
       ctx.font = "25px arial";
-      ctx.fillText(randomDomCode, 500, 70);
+      ctx.fillText(randomDomCode, 500, 60);
 
     }
 
@@ -238,7 +238,12 @@ function introScreen() {
   ctx.fillText("GAME YOUR BRAIN", canvas.width / 2, canvas.height / 2 - 150);
   ctx.font = "30px Impact";
   ctx.fillStyle = "silver";
-  ctx.fillText("Help Ash, an IronHack student to organized learnings in his brain", canvas.width / 2, canvas.height / 2 - 50);
+  ctx.fillText("Help Ash, an IronHack student to organized learnings in his brain", canvas.width / 2, canvas.height / 2 - 70);
+  ctx.font = "25px arial";
+
+  ctx.fillText("Goal is to take the disk, see on the screen what's on it", canvas.width / 2, canvas.height / 2 - 30);
+  ctx.fillText("and store it in the right server.", canvas.width / 2, canvas.height / 2);
+
   ctx.fillStyle = "tomato";
   ctx.font = "30px Arial";
   ctx.fillText(
@@ -251,39 +256,56 @@ function introScreen() {
     if (event.keyCode == 13 && !gameStarted) {
       // Drawing loop execution
       drawingLoop();
+      return stopPlaying
+
     }
   });
+
 }
 
 //===================
-// End game
+// End game and modal
+var finalScore = document.getElementsByClassName("display-score").innerHTML = ('34');
+var stopPlaying = setTimeout("endScreen()", 2000);
 
-// function endScreen() {
+
+function endScreen() {
+
+  console.log("Stop playing noob.");
+  openModal();
+  finalScore;
 
 
-//   ctx.fillStyle = "black";
-//   ctx.fillRect(0, 0, 1000, 600);
-//   ctx.font = "50px Impact";
-//   ctx.fillStyle = "blue";
-//   ctx.textAlign = "center";
-//   ctx.fillText("END SCREEN", canvas.width / 2, canvas.height / 2);
 
-//   ctx.font = "20px Arial";
-//   ctx.fillText(
-//     "Press p To Brain",
-//     canvas.width / 2,
-//     canvas.height / 2 + 50
-//   );
 
-//   document.body.addEventListener("keydown", function (event) {
-//     if (score > 15) {
-//       console.log('outro screen')
+}
 
-//       // Drawing loop execution
-//       drawingLoop();
-//     } else {}
-//   });
-// }
+// - modal ----------------
+
+var modal = document.getElementById('myModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+
+// open the modal 
+function openModal() {
+  modal.style.display = "block";
+}
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  document.location.reload(true)
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 
 //=====================
 // Drawing loop description
@@ -453,13 +475,13 @@ function drawRoom() {
   ctx.strokeStyle = "silver";
   ctx.lineWidth = 3;
 
-  ctx.strokeRect(380, 20, 240, 95);
-  ctx.fillRect(380, 20, 240, 95);
+  ctx.strokeRect(380, 10, 240, 95);
+  ctx.fillRect(380, 10, 240, 95);
 
   ctx.fillStyle = "black";
   ctx.strokeStyle = "silver";
-  ctx.strokeRect(400, 30, 200, 75);
-  ctx.fillRect(400, 30, 200, 75);
+  ctx.strokeRect(400, 20, 200, 75);
+  ctx.fillRect(400, 20, 200, 75);
 
 
   // Draw transfo
