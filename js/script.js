@@ -252,7 +252,7 @@ function introScreen() {
       timer();
       // Drawing loop execution
       drawingLoop();
-      return (stopPlaying = setTimeout("endScreen()", 11000));
+      return (stopPlaying = setTimeout("endScreen()", 30500));
     }
   });
 }
